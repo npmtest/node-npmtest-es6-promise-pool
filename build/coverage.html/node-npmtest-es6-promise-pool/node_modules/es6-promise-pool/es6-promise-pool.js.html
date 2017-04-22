@@ -1,0 +1,875 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-es6-promise-pool/node_modules/es6-promise-pool/es6-promise-pool.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-es6-promise-pool">npmtest-es6-promise-pool (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-es6-promise-pool/node_modules/es6-promise-pool/es6-promise-pool.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">28.57% <small>(34 / 119)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">10.77% <small>(7 / 65)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">10.34% <small>(3 / 29)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">28.57% <small>(34 / 119)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric">3 statements, 4 branches</span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-es6-promise-pool/node_modules/es6-promise-pool/</a> &#187; es6-promise-pool.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">(function (root, factory) {
+  /* istanbul ignore next */
+  <span class="skip-if-branch" title="if path not taken" >I</span>if (typeof define === 'function' &amp;&amp; <span class="branch-1 cbranch-skip" title="branch not covered" >define.amd)</span> {
+<span class="cstat-skip" title="statement not covered" >    define([], factory)</span>
+  } else <span class="skip-if-branch" title="else path not taken" >E</span>if (typeof exports === 'object') {
+    module.exports = factory()
+  } else {
+<span class="cstat-skip" title="statement not covered" >    root.PromisePool = factory()</span>
+    // Legacy API
+<span class="cstat-skip" title="statement not covered" >    root.promisePool = root.PromisePool</span>
+  }
+})(this, function () {
+  'use strict'
+&nbsp;
+  var EventTarget = function () {
+    this._listeners = {}
+  }
+&nbsp;
+  EventTarget.prototype.addEventListener = <span class="fstat-no" title="function not covered" >function (type, listener) {</span>
+<span class="cstat-no" title="statement not covered" >    this._listeners[type] = this._listeners[type] || []</span>
+<span class="cstat-no" title="statement not covered" >    if (this._listeners[type].indexOf(listener) &lt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >      this._listeners[type].push(listener)</span>
+    }
+  }
+&nbsp;
+  EventTarget.prototype.removeEventListener = <span class="fstat-no" title="function not covered" >function (type, listener) {</span>
+<span class="cstat-no" title="statement not covered" >    if (this._listeners[type]) {</span>
+<span class="cstat-no" title="statement not covered" >      var p = this._listeners[type].indexOf(listener)</span>
+<span class="cstat-no" title="statement not covered" >      if (p &gt;= 0) {</span>
+<span class="cstat-no" title="statement not covered" >        this._listeners[type].splice(p, 1)</span>
+      }
+    }
+  }
+&nbsp;
+  EventTarget.prototype.dispatchEvent = <span class="fstat-no" title="function not covered" >function (evt) {</span>
+<span class="cstat-no" title="statement not covered" >    if (this._listeners[evt.type] &amp;&amp; this._listeners[evt.type].length) {</span>
+<span class="cstat-no" title="statement not covered" >      var listeners = this._listeners[evt.type].slice()</span>
+<span class="cstat-no" title="statement not covered" >      for (var i = 0, l = listeners.length; i &lt; l; ++i) {</span>
+<span class="cstat-no" title="statement not covered" >        listeners[i].call(this, evt)</span>
+      }
+    }
+  }
+&nbsp;
+  var isGenerator = <span class="fstat-no" title="function not covered" >function (func) {</span>
+<span class="cstat-no" title="statement not covered" >    return (typeof func.constructor === 'function' &amp;&amp;</span>
+      func.constructor.name === 'GeneratorFunction')
+  }
+&nbsp;
+  var functionToIterator = <span class="fstat-no" title="function not covered" >function (func) {</span>
+<span class="cstat-no" title="statement not covered" >    return {</span>
+      next: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        var promise = func()</span>
+<span class="cstat-no" title="statement not covered" >        return promise ? {value: promise} : {done: true}</span>
+      }
+    }
+  }
+&nbsp;
+  var promiseToIterator = <span class="fstat-no" title="function not covered" >function (promise) {</span>
+<span class="cstat-no" title="statement not covered" >    var called = false</span>
+<span class="cstat-no" title="statement not covered" >    return {</span>
+      next: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        if (called) {</span>
+<span class="cstat-no" title="statement not covered" >          return {done: true}</span>
+        }
+<span class="cstat-no" title="statement not covered" >        called = true</span>
+<span class="cstat-no" title="statement not covered" >        return {value: promise}</span>
+      }
+    }
+  }
+&nbsp;
+  var toIterator = <span class="fstat-no" title="function not covered" >function (obj, Promise) {</span>
+<span class="cstat-no" title="statement not covered" >    var type = typeof obj</span>
+<span class="cstat-no" title="statement not covered" >    if (type === 'object') {</span>
+<span class="cstat-no" title="statement not covered" >      if (typeof obj.next === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >        return obj</span>
+      }
+      /* istanbul ignore else */
+<span class="cstat-no" title="statement not covered" >      if (typeof obj.then === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >        return promiseToIterator(obj)</span>
+      }
+    }
+<span class="cstat-no" title="statement not covered" >    if (type === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >      return isGenerator(obj) ? obj() : functionToIterator(obj)</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return promiseToIterator(Promise.resolve(obj))</span>
+  }
+&nbsp;
+  var PromisePoolEvent = <span class="fstat-no" title="function not covered" >function (target, type, data) {</span>
+<span class="cstat-no" title="statement not covered" >    this.target = target</span>
+<span class="cstat-no" title="statement not covered" >    this.type = type</span>
+<span class="cstat-no" title="statement not covered" >    this.data = data</span>
+  }
+&nbsp;
+  var PromisePool = <span class="fstat-no" title="function not covered" >function (source, concurrency, options) {</span>
+<span class="cstat-no" title="statement not covered" >    EventTarget.call(this)</span>
+<span class="cstat-no" title="statement not covered" >    if (typeof concurrency !== 'number' ||</span>
+        Math.floor(concurrency) !== concurrency ||
+        concurrency &lt; 1) {
+<span class="cstat-no" title="statement not covered" >      throw new Error('Invalid concurrency')</span>
+    }
+<span class="cstat-no" title="statement not covered" >    this._concurrency = concurrency</span>
+<span class="cstat-no" title="statement not covered" >    this._options = options || {}</span>
+<span class="cstat-no" title="statement not covered" >    this._options.promise = this._options.promise || Promise</span>
+<span class="cstat-no" title="statement not covered" >    this._iterator = toIterator(source, this._options.promise)</span>
+<span class="cstat-no" title="statement not covered" >    this._done = false</span>
+<span class="cstat-no" title="statement not covered" >    this._size = 0</span>
+<span class="cstat-no" title="statement not covered" >    this._promise = null</span>
+<span class="cstat-no" title="statement not covered" >    this._callbacks = null</span>
+  }
+  PromisePool.prototype = new EventTarget()
+  PromisePool.prototype.constructor = PromisePool
+&nbsp;
+  PromisePool.prototype.concurrency = <span class="fstat-no" title="function not covered" >function (value) {</span>
+<span class="cstat-no" title="statement not covered" >    if (typeof value !== 'undefined') {</span>
+<span class="cstat-no" title="statement not covered" >      this._concurrency = value</span>
+<span class="cstat-no" title="statement not covered" >      if (this.active()) {</span>
+<span class="cstat-no" title="statement not covered" >        this._proceed()</span>
+      }
+    }
+<span class="cstat-no" title="statement not covered" >    return this._concurrency</span>
+  }
+&nbsp;
+  PromisePool.prototype.size = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    return this._size</span>
+  }
+&nbsp;
+  PromisePool.prototype.active = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    return !!this._promise</span>
+  }
+&nbsp;
+  PromisePool.prototype.promise = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    return this._promise</span>
+  }
+&nbsp;
+  PromisePool.prototype.start = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    var that = this</span>
+<span class="cstat-no" title="statement not covered" >    var Promise = this._options.promise</span>
+<span class="cstat-no" title="statement not covered" >    this._promise = new Promise(<span class="fstat-no" title="function not covered" >function (resolve, reject) {</span></span>
+<span class="cstat-no" title="statement not covered" >      that._callbacks = {</span>
+        reject: reject,
+        resolve: resolve
+      }
+<span class="cstat-no" title="statement not covered" >      that._proceed()</span>
+    })
+<span class="cstat-no" title="statement not covered" >    return this._promise</span>
+  }
+&nbsp;
+  PromisePool.prototype._fireEvent = <span class="fstat-no" title="function not covered" >function (type, data) {</span>
+<span class="cstat-no" title="statement not covered" >    this.dispatchEvent(new PromisePoolEvent(this, type, data))</span>
+  }
+&nbsp;
+  PromisePool.prototype._settle = <span class="fstat-no" title="function not covered" >function (error) {</span>
+<span class="cstat-no" title="statement not covered" >    if (error) {</span>
+<span class="cstat-no" title="statement not covered" >      this._callbacks.reject(error)</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      this._callbacks.resolve()</span>
+    }
+<span class="cstat-no" title="statement not covered" >    this._promise = null</span>
+<span class="cstat-no" title="statement not covered" >    this._callbacks = null</span>
+  }
+&nbsp;
+  PromisePool.prototype._onPooledPromiseFulfilled = <span class="fstat-no" title="function not covered" >function (promise, result) {</span>
+<span class="cstat-no" title="statement not covered" >    this._size--</span>
+<span class="cstat-no" title="statement not covered" >    if (this.active()) {</span>
+<span class="cstat-no" title="statement not covered" >      this._fireEvent('fulfilled', {</span>
+        promise: promise,
+        result: result
+      })
+<span class="cstat-no" title="statement not covered" >      this._proceed()</span>
+    }
+  }
+&nbsp;
+  PromisePool.prototype._onPooledPromiseRejected = <span class="fstat-no" title="function not covered" >function (promise, error) {</span>
+<span class="cstat-no" title="statement not covered" >    this._size--</span>
+<span class="cstat-no" title="statement not covered" >    if (this.active()) {</span>
+<span class="cstat-no" title="statement not covered" >      this._fireEvent('rejected', {</span>
+        promise: promise,
+        error: error
+      })
+<span class="cstat-no" title="statement not covered" >      this._settle(error || new Error('Unknown error'))</span>
+    }
+  }
+&nbsp;
+  PromisePool.prototype._trackPromise = <span class="fstat-no" title="function not covered" >function (promise) {</span>
+<span class="cstat-no" title="statement not covered" >    var that = this</span>
+<span class="cstat-no" title="statement not covered" >    promise</span>
+      .then(<span class="fstat-no" title="function not covered" >function (result) {</span>
+<span class="cstat-no" title="statement not covered" >        that._onPooledPromiseFulfilled(promise, result)</span>
+      }, <span class="fstat-no" title="function not covered" >function (error) {</span>
+<span class="cstat-no" title="statement not covered" >        that._onPooledPromiseRejected(promise, error)</span>
+      })['catch'](<span class="fstat-no" title="function not covered" >function (err) {</span>
+<span class="cstat-no" title="statement not covered" >        that._settle(new Error('Promise processing failed: ' + err))</span>
+      })
+  }
+&nbsp;
+  PromisePool.prototype._proceed = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    if (!this._done) {</span>
+<span class="cstat-no" title="statement not covered" >      var result = null</span>
+<span class="cstat-no" title="statement not covered" >      while (this._size &lt; this._concurrency &amp;&amp;</span>
+          !(result = this._iterator.next()).done) {
+<span class="cstat-no" title="statement not covered" >        this._size++</span>
+<span class="cstat-no" title="statement not covered" >        this._trackPromise(result.value)</span>
+      }
+<span class="cstat-no" title="statement not covered" >      this._done = (result === null || !!result.done)</span>
+    }
+<span class="cstat-no" title="statement not covered" >    if (this._done &amp;&amp; this._size === 0) {</span>
+<span class="cstat-no" title="statement not covered" >      this._settle()</span>
+    }
+  }
+&nbsp;
+  PromisePool.PromisePoolEvent = PromisePoolEvent
+  // Legacy API
+  PromisePool.PromisePool = PromisePool
+&nbsp;
+  return PromisePool
+})
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Sat Apr 22 2017 14:23:19 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
